@@ -25,7 +25,7 @@ library(deldir)
 ##-- Chamando as funções criadas ----
 source("functions/utils.R")
 source("functions/plot_functions.R")
-#source("carrega_dados.R")
+source("carrega_dados.R")
 cores <- c("#098ebb", "#fdc23a", "#e96449", "#818286")
 ##-- Chamando os componentes do header shiny ----
 tab_files <- list.files(path = "tabs", full.names = T)
