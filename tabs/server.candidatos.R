@@ -226,13 +226,13 @@ dados_candidato <- eventReactive(input$perfil_candidato_gerar_visualizacoes,{
   cargos_candidato <- unique(toupper(chaves_candidato$DESCRICAO_CARGO))
   
   dados <- list()
-  dados[["vereador"]] <- vereador %>% filter(CPF_CANDIDATO == candidato) %>% collect()
-  dados[["prefeito"]] <- prefeito %>% filter(CPF_CANDIDATO == candidato) %>% collect()
-  dados[["dep_estadual"]] <- dep_estadual %>% filter(CPF_CANDIDATO == candidato) %>% collect()
-  dados[["governador"]] <- governador %>% filter(CPF_CANDIDATO == candidato) %>% collect()
-  dados[["dep_federal "]] <- dep_federal %>% filter(CPF_CANDIDATO == candidato) %>% collect()
-  dados[["senador"]] <- senador %>% filter(CPF_CANDIDATO == candidato) %>% collect()
-  dados[["presidente"]] <- presidente %>% filter(CPF_CANDIDATO == candidato) %>% collect()
+  dados[["vereador"]] <- vereador %>% filter(CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO) %>% collect()
+  dados[["prefeito"]] <- prefeito %>% filter(CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO)  %>% collect()
+  dados[["dep_estadual"]] <- dep_estadual %>% filter(CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO)  %>% collect()
+  dados[["governador"]] <- governador %>% filter(CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO)  %>% collect()
+  dados[["dep_federal "]] <- dep_federal %>% filter(CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO)  %>% collect()
+  dados[["senador"]] <- senador %>% filter(CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO)  %>% collect()
+  dados[["presidente"]] <- presidente %>% filter(CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO)  %>% collect()
   
   dados <- bind_rows(dados)
   
@@ -244,13 +244,13 @@ dados_eleicao <- eventReactive(input$perfil_candidato_gerar_visualizacoes,{
   turno <- isolate(input$perfil_candidato_turno)
   turno <- ifelse(turno == "1º turno", "1", "2")
   
-  if(cargo == "VEREADOR") dados <- vereador %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "PREFEITO") dados <- prefeito %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "DEPUTADO ESTADUAL") dados <- dep_estadual %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "GOVERNADOR") dados <- governador %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "DEPUTADO FEDERAL") dados <- dep_federal %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "SENADOR") dados <- senador %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "PRESIDENTE") dados <- presidente %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno)
+  if(cargo == "VEREADOR") dados <- vereador %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "PREFEITO") dados <- prefeito %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "DEPUTADO ESTADUAL") dados <- dep_estadual %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "GOVERNADOR") dados <- governador %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "DEPUTADO FEDERAL") dados <- dep_federal %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "SENADOR") dados <- senador %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "PRESIDENTE") dados <- presidente %>% filter(ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
   
   return(dados = dados)
 })
@@ -261,13 +261,13 @@ dados_candidato_eleicao <- eventReactive(input$perfil_candidato_gerar_visualizac
   turno <- ifelse(turno == "1º turno", 1, 2)
   candidato <- input$perfil_candidato_cpf
   
-  if(cargo == "VEREADOR") dados <- vereador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato)# %>% collect()
-  if(cargo == "PREFEITO") dados <- prefeito %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato)# %>% collect()
-  if(cargo == "DEPUTADO ESTADUAL") dados <- dep_estadual %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato)# %>% collect()
-  if(cargo == "GOVERNADOR") dados <- governador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato)# %>% collect()
-  if(cargo == "DEPUTADO FEDERAL") dados <- dep_federal %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato)# %>% collect()
-  if(cargo == "SENADOR") dados <- senador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato)# %>% collect()
-  if(cargo == "PRESIDENTE") dados <- presidente %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato)# %>% collect()
+  if(cargo == "VEREADOR") dados <- vereador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO) # %>% collect()
+  if(cargo == "PREFEITO") dados <- prefeito %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO) # %>% collect()
+  if(cargo == "DEPUTADO ESTADUAL") dados <- dep_estadual %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO) # %>% collect()
+  if(cargo == "GOVERNADOR") dados <- governador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO) # %>% collect()
+  if(cargo == "DEPUTADO FEDERAL") dados <- dep_federal %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO) # %>% collect()
+  if(cargo == "SENADOR") dados <- senador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO) # %>% collect()
+  if(cargo == "PRESIDENTE") dados <- presidente %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & CPF_CANDIDATO == candidato) %>% select(-COMPOSICAO_COLIGACAO) # %>% collect()
   
   dados <- dados %>% filter(NUM_TURNO == turno)
   
@@ -275,7 +275,7 @@ dados_candidato_eleicao <- eventReactive(input$perfil_candidato_gerar_visualizac
 })
 ##-- + Outputs ----
 output$perfil_candidatos_mapa <- renderLeaflet({
-
+  
   candidato <- isolate(input$perfil_candidato_cpf)
   estado <- isolate(input$perfil_candidato_estado)
   cargo <- isolate(input$perfil_candidato_cargo)
@@ -286,7 +286,6 @@ output$perfil_candidatos_mapa <- renderLeaflet({
                              domain = c(0,1))
   
   if(cargo == "PRESIDENTE" & estado == "Todos os estados"){
-    
     dados_eleicoes <- dados_eleicao() %>%
       collect() %>%
       mutate(QTDE_VOTOS = as.numeric(QTDE_VOTOS)) %>%
@@ -298,7 +297,7 @@ output$perfil_candidatos_mapa <- renderLeaflet({
       ungroup() %>%
       select(UF, CPF_CANDIDATO, QTDE_VOTOS, PROPORCAO) %>%
       filter(CPF_CANDIDATO == candidato) %>%
-      unique
+      unique()
     
     shape <- regUF  
     
@@ -312,6 +311,7 @@ output$perfil_candidatos_mapa <- renderLeaflet({
     cores_poligonos <- cores(shape@data$`Proporção`)
     
     shape@data$`Número de votos` <- formatC(shape@data$`Número de votos`, big.mark = ".", decimal.mark = ",", format = "d")
+    shape@data$`prop_numerica` <- shape@data$`Proporção`
     shape@data$`Proporção` <- paste(round(shape@data$Proporção*100, 2), "%")
     
     popup <- popupTable(shape@data, zcol = c("Estado", "Número de votos", "Proporção"))
@@ -326,7 +326,7 @@ output$perfil_candidatos_mapa <- renderLeaflet({
       ungroup() %>%
       select(UF, COD_MUN_IBGE, CPF_CANDIDATO, QTDE_VOTOS, PROPORCAO) %>%
       filter(CPF_CANDIDATO == candidato) %>%
-      unique
+      unique()
     
     shape <- regMun
     
@@ -348,6 +348,7 @@ output$perfil_candidatos_mapa <- renderLeaflet({
     cores_poligonos <- cores(shape@data$`Proporção`)
     
     shape@data$`Número de votos` <- formatC(shape@data$`Número de votos`, big.mark = ".", decimal.mark = ",", format = "d")
+    shape@data$`prop_numerica` <- shape@data$`Proporção`
     shape@data$`Proporção` <- paste(round(shape@data$Proporção*100, 2), "%")
     
     popup <- popupTable(shape@data, zcol = c("UF", "Município", "Número de votos", "Proporção"))
@@ -377,7 +378,11 @@ output$perfil_candidatos_mapa <- renderLeaflet({
     addProviderTiles(providers$CartoDB.Positron,
                      options = providerTileOptions(noWrap = T))
   
-  mapa_proporcoes
+  mapa_proporcoes %>%
+    addLegend("bottomright", pal = cores, values = shape$prop_numerica,
+              opacity = .9, 
+              title = "Proporção de votos", 
+              labFormat = labelFormat(suffix= "%", digits = 4, transform = function(x) x*100))
 })
 
 output$perfil_candidato <- renderUI({
@@ -387,7 +392,8 @@ output$perfil_candidato <- renderUI({
   turno <- ifelse(turno == "1º turno", "1", "2")
   
   dados_candidato_df <- dados_candidato() %>% 
-    filter(ANO_ELEICAO == ano & NUM_TURNO == turno)
+    filter(ANO_ELEICAO == ano & NUM_TURNO == turno) %>%
+    unique()
   
   info_gerais <- dados_candidato_df[1, c("NOME_CANDIDATO", "NUMERO_CANDIDATO", "NOME_URNA_CANDIDATO", "DESCRICAO_CARGO", 
                                          "SIGLA_PARTIDO", "NOME_PARTIDO", "DESCRICAO_OCUPACAO", "DATA_NASCIMENTO", 
@@ -400,17 +406,17 @@ output$perfil_candidato <- renderUI({
   
   wellPanel(
     HTML(sprintf("<h3><b>Nome:</b> %s</h3>
-               <h3><b>Nome na urna:</b> %s</h3>
-               <h3><b>Sexo:</b> %s</h3>
-               <h3><b>Idade:</b> %s</h3>
-               <h3><b>Cidade natal:</b> %s</h3>
-               <h3><b>Profissão:</b> %s</h3>
-               <h3><b>Grau de instrução:</b> %s</h3>
-               <h3><b>Etnia:</b> %s</h3>
-               <h3><b>Partido:</b> %s</h3>
-               <h3><b>Cargo:</b> %s</h3>
-               <h3><b>Número de votos:</b> %s</h3>
-               <h3><b>Situação no turno:</b> %s</h3>",
+                 <h3><b>Nome na urna:</b> %s</h3>
+                 <h3><b>Sexo:</b> %s</h3>
+                 <h3><b>Idade:</b> %s</h3>
+                 <h3><b>Cidade natal:</b> %s</h3>
+                 <h3><b>Profissão:</b> %s</h3>
+                 <h3><b>Grau de instrução:</b> %s</h3>
+                 <h3><b>Etnia:</b> %s</h3>
+                 <h3><b>Partido:</b> %s</h3>
+                 <h3><b>Cargo:</b> %s</h3>
+                 <h3><b>Número de votos:</b> %s</h3>
+                 <h3><b>Situação no turno:</b> %s</h3>",
                  info_gerais$NOME_CANDIDATO,
                  info_gerais$NOME_URNA_CANDIDATO,
                  info_gerais$DESCRICAO_SEXO,

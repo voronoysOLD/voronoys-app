@@ -4,26 +4,26 @@ dados_eleicao_geral <- reactive({
   turno <- input$eleicoes_turno
   turno <- ifelse(turno == "1º turno", "1", "2")
   
-  if(cargo == "VEREADOR") dados <- vereador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "PREFEITO") dados <- prefeito %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "DEPUTADO ESTADUAL") dados <- dep_estadual %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "GOVERNADOR") dados <- governador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "DEPUTADO FEDERAL") dados <- dep_federal %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "SENADOR") dados <- senador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno)
-  if(cargo == "PRESIDENTE") dados <- presidente %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno)
+  if(cargo == "VEREADOR") dados <- vereador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "PREFEITO") dados <- prefeito %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "DEPUTADO ESTADUAL") dados <- dep_estadual %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "GOVERNADOR") dados <- governador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "DEPUTADO FEDERAL") dados <- dep_federal %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "SENADOR") dados <- senador %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
+  if(cargo == "PRESIDENTE") dados <- presidente %>% filter(DESCRICAO_CARGO == cargo & ANO_ELEICAO == ano & NUM_TURNO == turno) %>% select(-COMPOSICAO_COLIGACAO)
   
   return(dados = dados)
 })
 
 output$mapa_uf_geral <- renderLeaflet({
-
+  
   cargo <- input$eleicoes_cargo
   
   names(regUF)[c(1, 3)] <- c("UF", "REG")
   
   dados <- dados_eleicao_geral()
   dados <- dados %>% mutate(QTDE_VOTOS := as.numeric(QTDE_VOTOS)) %>% collect()
- 
+  
   paleta_col <- ggthemes::tableau_color_pal("tableau20")(20)
   
   ano_eleicao <- input$eleicoes_ano
@@ -39,7 +39,7 @@ output$mapa_mun_geral <- renderLeaflet({
   cargo <- input$eleicoes_cargo
   
   dados <- dados_eleicao_geral()
-  dados <- dados %>% mutate(QTDE_VOTOS := as.numeric(QTDE_VOTOS)) %>% collect()
+  dados <- dados %>% mutate(QTDE_VOTOS := as.numeric(QTDE_VOTOS)) %>% collect() %>% unique()
   
   paleta_col <- ggthemes::tableau_color_pal("tableau20")(20)
   
@@ -53,11 +53,11 @@ output$mapa_mun_geral <- renderLeaflet({
 })
 
 output$donut_geral <- renderPlotly({
-
+  
   cargo <- input$eleicoes_cargo
   
   dados <- dados_eleicao_geral()
-  dados <- dados %>% mutate(QTDE_VOTOS = as.numeric(QTDE_VOTOS)) %>% collect()
+  dados <- dados %>% mutate(QTDE_VOTOS = as.numeric(QTDE_VOTOS)) %>% collect() %>% unique()
   
   paleta_col <- ggthemes::tableau_color_pal("tableau20")(20)
   
@@ -92,7 +92,7 @@ output$barras_geral <- renderPlotly({
   cargo <- input$eleicoes_cargo
   
   dados <- dados_eleicao_geral()
-  dados <- dados %>% mutate(QTDE_VOTOS = as.numeric(QTDE_VOTOS)) %>% collect()
+  dados <- dados %>% mutate(QTDE_VOTOS = as.numeric(QTDE_VOTOS)) %>% collect() %>% unique()
   
   paleta_col <- ggthemes::tableau_color_pal("tableau20")(20)
   

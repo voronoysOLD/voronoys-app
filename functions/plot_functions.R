@@ -16,7 +16,7 @@ donut_plot <- function(data, value_var, group_var, turno_filtro, colors_pal) {
                        # color = ~`group_var`,
                        values = ~value_var, 
                        colors = colors_pal
-                       ) %>%
+  ) %>%
     add_pie(hole = 0.6) %>%
     layout(title = "",  showlegend = F,
            xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
