@@ -234,7 +234,7 @@ output$mapa_votos_voronoi <- renderLeaflet({
   ) %>% lapply(htmltools::HTML)
   
   leaflet(data = sf_secoes) %>%
-    addProviderTiles(providers$CartoDB.Positron) %>%
+    addProviderTiles(providers$CartoDB.DarkMatter) %>%
     addPolygons(color = "#222222", weight = 0.1, smoothFactor = 0.5,
                 opacity = 1.0, fillOpacity = 0.7,
                 fillColor = ~paleta1(get(PARTIDO)),
@@ -274,7 +274,7 @@ output$mapa_renda_voronoi <- renderLeaflet({
   paleta1 <- colorFactor(palette = RColorBrewer::brewer.pal(5, 'Reds'), sf_secoes$classe) 
   
   leaflet(data = sf_secoes) %>%
-    addProviderTiles(providers$CartoDB.Positron) %>%
+    addProviderTiles(providers$CartoDB.DarkMatter) %>%
     addPolygons(color = "#222222", weight = 0.1, smoothFactor = 0.5,
                 opacity = 1.0, fillOpacity = 0.7,
                 fillColor = ~paleta1(classe),
