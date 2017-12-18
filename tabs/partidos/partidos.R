@@ -5,7 +5,7 @@ partido <- tabPanel(title = "Análise Partidária",
                            column(width = 2,
                                   pickerInput(inputId = "partido_ano", 
                                               label = "Ano", 
-                                              choices = anos, 
+                                              choices = c(2010, 2014), 
                                               selected = 2014, 
                                               options = list(`live-search` = TRUE))
                            ),

@@ -12,7 +12,7 @@ partido_geral <- tabPanel(title = "Análise geral",
                                  column(width = 2,
                                         pickerInput(inputId = "partido_geral_cargo", 
                                                     label = "Cargo", 
-                                                    choices = c("GOVERNADOR", "PREFEITO"), 
+                                                    choices = c("GOVERNADOR", "PRESIDENTE"), 
                                                     selected = "GOVERNADOR",
                                                     options = list(`live-search` = TRUE))
                                  ),
@@ -55,7 +55,7 @@ partido_geral <- tabPanel(title = "Análise geral",
                           column(width = 6,
                                  conditionalPanel(condition = "input.partidos_gerar_visualizacoes1 > 0 & input.partido_geral_ano == '2014'",
                                                   br(), hr(), br(),
-                                                  HTML("<center><h1>10 MAIORES SETORES DOS DOADORES</h1></center>"),
+                                                  HTML("<center><h1>DESPESAS POR PARTIDO</h1></center>"),
                                                   column(width = 12,
                                                          highchartOutput("treemap_desp") 
                                                   )           

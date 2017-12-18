@@ -72,7 +72,7 @@ perfil_eleitorado <- tabPanel(title = "Perfil do eleitorado",
                               column(width = 6,
                                      conditionalPanel(condition = "input.perfil_candidato_voronoi_gerar_visualizacoes > 0",
                                                       br(), hr(), br(),
-                                                      HTML("<center><h1>MAPA DA RENDA PER CAPITA POR SEÇÃO ELEITORAL</h1></center>"),
+                                                      HTML("<center><h1>MAPA DA RENDA PER CAPITA POR S.E.</h1></center>"),
                                                       br(), br(),
                                                       column(width = 12,
                                                              leafletOutput("mapa_renda_voronoi", height = "500px")

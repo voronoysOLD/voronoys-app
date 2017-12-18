@@ -21,7 +21,7 @@ observeEvent(input$partido_ano,{
                       inputId = "partido_cargo",
                       label = "Cargo",
                       # choices = unique(chaves_sub$DESCRICAO_CARGO),
-                      choices = c("GOVERNADOR", "PREFEITO"), 
+                      choices = c("GOVERNADOR", "PRESIDENTE"), 
                       selected = cargo_default)
     
   }

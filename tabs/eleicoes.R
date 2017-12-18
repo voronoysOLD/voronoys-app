@@ -40,7 +40,7 @@ eleicoes <- tabPanel(title = "Eleições",
                                        color = "success", 
                                        icon = icon("check")) 
                      ),
-                     column(width = 3,
+                     column(width = 4,
                             br(), hr(), br(),
                             conditionalPanel(condition = "input.eleicoes_gerar_visualizacoes > 0",
                                              HTML("<center><h1>MAPA DAS ELEIÇÕES POR ESTADO</h1></center>"),
@@ -48,7 +48,7 @@ eleicoes <- tabPanel(title = "Eleições",
                                              leafletOutput("mapa_uf_geral")
                             )
                      ),
-                     column(width = 3,
+                     column(width = 4,
                             br(), hr(), br(),
                             conditionalPanel(condition = "input.eleicoes_gerar_visualizacoes > 0",
                                              HTML("<center><h1>MAPA DAS ELEIÇÕES POR MUNICÍPIO</h1></center>"),
@@ -57,22 +57,22 @@ eleicoes <- tabPanel(title = "Eleições",
 
                             )
                      ),
-                     column(width = 3,
+                     column(width = 4,
                             br(), hr(), br(),
                             conditionalPanel(condition = "input.eleicoes_gerar_visualizacoes > 0",
-                                             HTML("<center><h1>GRÁFICO DE BARRAS DA PROPORÇÃO DE VOTOS</h1></center>"),
+                                             HTML("<center><h1>GRÁFICO DE BARRAS DO % DE VOTOS</h1></center>"),
                                              br(),
                                              plotlyOutput("barras_geral")
                                              
                             )
-                     ),
-                     column(width = 3,
-                            br(), hr(), br(),
-                            conditionalPanel(condition = "input.eleicoes_gerar_visualizacoes > 0",
-                                             HTML("<center><h1>DONUT DA PROPORÇÃO DE VOTOS</h1></center>"),
-                                             br(),
-                                             plotlyOutput("donut_geral")
-                                             
-                            )
                      )
+                     # column(width = 3,
+                     #        br(), hr(), br(),
+                     #        conditionalPanel(condition = "input.eleicoes_gerar_visualizacoes > 0",
+                     #                         HTML("<center><h1>DONUT DA PROPORÇÃO DE VOTOS</h1></center>"),
+                     #                         br(),
+                     #                         plotlyOutput("donut_geral")
+                     #                         
+                     #        )
+                     # )
 )

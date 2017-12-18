@@ -52,40 +52,40 @@ output$mapa_mun_geral <- renderLeaflet({
   mapa_mun(data = dados, poly = regMun, ano_eleicao = ano_eleicao, turno_filtro = turno, uf = cod_uf)
 })
 
-output$donut_geral <- renderPlotly({
-  
-  cargo <- input$eleicoes_cargo
-  
-  dados <- dados_eleicao_geral()
-  dados <- dados %>% mutate(QTDE_VOTOS = as.numeric(QTDE_VOTOS)) %>% collect() %>% unique()
-  
-  paleta_col <- ggthemes::tableau_color_pal("tableau20")(20)
-  
-  ano_eleicao <- input$eleicoes_ano
-  cod_uf <- input$eleicoes_estado
-  turno <- input$eleicoes_turno
-  turno <- ifelse(turno == "1º turno", "1", "2")
-  
-  if(cod_uf == "Todos os estados"){
-    dados <- dados %>% filter(ANO_ELEICAO == ano_eleicao)
-    candidato_df <- dados %>%
-      group_by(NUM_TURNO, CPF_CANDIDATO, NUMERO_CANDIDATO, NOME_URNA_CANDIDATO, NOME_CANDIDATO, SIGLA_PARTIDO) %>%
-      summarise(QTDE_VOTOS_TOT = sum(QTDE_VOTOS))
-  } else{ 
-    dados <- dados %>% filter(ANO_ELEICAO == ano_eleicao & UF == cod_uf)
-    candidato_df <- dados %>%
-      group_by(NUM_TURNO, CPF_CANDIDATO, NUMERO_CANDIDATO, NOME_URNA_CANDIDATO, NOME_CANDIDATO, SIGLA_PARTIDO) %>%
-      summarise(QTDE_VOTOS_TOT = sum(QTDE_VOTOS))
-  }
-  
-  ## Donut da proporção de votos
-  donut_plot(data = candidato_df, 
-             value_var = "QTDE_VOTOS_TOT", 
-             group_var = "NOME_URNA_CANDIDATO", 
-             turno_filtro = turno, 
-             colors_pal = paleta_col) 
-  
-})
+# output$donut_geral <- renderPlotly({
+#   
+#   cargo <- input$eleicoes_cargo
+#   
+#   dados <- dados_eleicao_geral()
+#   dados <- dados %>% mutate(QTDE_VOTOS = as.numeric(QTDE_VOTOS)) %>% collect() %>% unique()
+#   
+#   paleta_col <- ggthemes::tableau_color_pal("tableau20")(20)
+#   
+#   ano_eleicao <- input$eleicoes_ano
+#   cod_uf <- input$eleicoes_estado
+#   turno <- input$eleicoes_turno
+#   turno <- ifelse(turno == "1º turno", "1", "2")
+#   
+#   if(cod_uf == "Todos os estados"){
+#     dados <- dados %>% filter(ANO_ELEICAO == ano_eleicao)
+#     candidato_df <- dados %>%
+#       group_by(NUM_TURNO, CPF_CANDIDATO, NUMERO_CANDIDATO, NOME_URNA_CANDIDATO, NOME_CANDIDATO, SIGLA_PARTIDO) %>%
+#       summarise(QTDE_VOTOS_TOT = sum(QTDE_VOTOS))
+#   } else{ 
+#     dados <- dados %>% filter(ANO_ELEICAO == ano_eleicao & UF == cod_uf)
+#     candidato_df <- dados %>%
+#       group_by(NUM_TURNO, CPF_CANDIDATO, NUMERO_CANDIDATO, NOME_URNA_CANDIDATO, NOME_CANDIDATO, SIGLA_PARTIDO) %>%
+#       summarise(QTDE_VOTOS_TOT = sum(QTDE_VOTOS))
+#   }
+#   
+#   ## Donut da proporção de votos
+#   donut_plot(data = candidato_df, 
+#              value_var = "QTDE_VOTOS_TOT", 
+#              group_var = "NOME_URNA_CANDIDATO", 
+#              turno_filtro = turno, 
+#              colors_pal = paleta_col) 
+#   
+# })
 
 output$barras_geral <- renderPlotly({
   
