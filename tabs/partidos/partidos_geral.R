@@ -12,7 +12,7 @@ partido_geral <- tabPanel(title = "Análise geral",
                                  column(width = 2,
                                         pickerInput(inputId = "partido_geral_cargo", 
                                                     label = "Cargo", 
-                                                    choices = c("GOVERNADOR", "PRESIDENTE"), 
+                                                    choices = c("GOVERNADOR", "PRESIDENTE", "PREFEITO"), 
                                                     selected = "GOVERNADOR",
                                                     options = list(`live-search` = TRUE))
                                  ),
